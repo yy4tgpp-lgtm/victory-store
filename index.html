@@ -5,109 +5,93 @@
   <title>Victory Store</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Arial,Tahoma,sans-serif;background:#070707;color:white;min-height:100vh}
+    body{font-family:Arial,Tahoma,sans-serif;background:#070707;color:white;min-height:100vh;overflow-x:hidden}
     body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 20% 10%,rgba(250,204,21,.18),transparent 30%),linear-gradient(135deg,#151515,#050505 60%,#130d03)}
-    a{text-decoration:none;color:inherit}
-    .header{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.1)}
+    a{text-decoration:none;color:inherit}button{font-family:inherit;cursor:pointer;border:0}
+    .header{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.1)}
     .nav{max-width:1100px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
     .brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900;color:#facc15;letter-spacing:3px}
     .brand img{width:42px;height:42px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 0 12px rgba(250,204,21,.7))}
-    .nav-links{display:flex;gap:20px;font-weight:900;color:#ddd}
-    .nav-links a:hover{color:#facc15}
+    .cart-btn{position:relative;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.35);color:#facc15;border-radius:18px;padding:12px 18px;font-size:22px;font-weight:900}
+    .cart-count{position:absolute;top:-10px;left:-10px;background:#facc15;color:#000;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:900}
     .hero{max-width:1100px;margin:auto;text-align:center;padding:60px 18px 35px}
     .logo-big{width:120px;height:120px;margin:0 auto 25px;border-radius:50%;display:grid;place-items:center;background:#000;box-shadow:0 0 60px rgba(250,204,21,.25),inset 0 0 30px rgba(255,255,255,.08)}
-    .logo-big img{width:82px;height:82px;object-fit:contain;opacity:.9;transition:.25s}
-    .logo-big img:hover,.logo-big img:active{opacity:1;transform:scale(1.12);filter:brightness(1.3) drop-shadow(0 0 14px rgba(250,204,21,.9))}
-    h1{font-size:clamp(30px,6vw,62px);line-height:1.25;font-weight:900}
-    .gold{background:linear-gradient(90deg,#fef08a,#facc15,#f97316);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .logo-big img{width:82px;height:82px;object-fit:contain;opacity:.9;transition:.25s}.logo-big img:hover,.logo-big img:active{opacity:1;transform:scale(1.12);filter:brightness(1.3) drop-shadow(0 0 14px rgba(250,204,21,.9))}
+    h1{font-size:clamp(30px,6vw,62px);line-height:1.25;font-weight:900}.gold{background:linear-gradient(90deg,#fef08a,#facc15,#f97316);-webkit-background-clip:text;background-clip:text;color:transparent}
     .hero p{margin:18px auto 0;max-width:760px;color:#d4d4d8;font-size:clamp(17px,3vw,23px);line-height:1.8;font-weight:800}
-    .section{max-width:1100px;margin:auto;padding:35px 18px 60px}
-    .section h2{text-align:right;font-size:36px;margin-bottom:24px;color:white}
+    .section{max-width:1100px;margin:auto;padding:35px 18px 60px}.section h2{text-align:right;font-size:36px;margin-bottom:24px;color:white}
     .products{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:18px 0 28px;-webkit-overflow-scrolling:touch}.products::-webkit-scrollbar{height:6px}.products::-webkit-scrollbar-thumb{background:#facc15;border-radius:999px}
-    .card{min-width:285px;max-width:320px;scroll-snap-align:center;background:#141414;border:1px solid rgba(255,255,255,.1);border-radius:26px;overflow:hidden;box-shadow:0 22px 60px rgba(0,0,0,.45);transition:.25s;flex:0 0 auto}
-    .card:hover{transform:translateY(-7px)}
-    .image-box{height:280px;background:#0b0b0b;position:relative;overflow:hidden}
-    .image-box img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;transition:.3s}.image-box img:hover{transform:scale(1.08);filter:brightness(1.1)}
+    .card{min-width:285px;max-width:320px;scroll-snap-align:center;background:#141414;border:1px solid rgba(255,255,255,.1);border-radius:26px;overflow:hidden;box-shadow:0 22px 60px rgba(0,0,0,.45);transition:.25s;flex:0 0 auto}.card:hover{transform:translateY(-7px)}
+    .image-box{height:280px;background:#0b0b0b;position:relative;overflow:hidden}.image-box img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;transition:.3s}.image-box img:hover{transform:scale(1.08);filter:brightness(1.1)}
     .badge{position:absolute;top:14px;right:14px;background:linear-gradient(90deg,#fde047,#f59e0b);color:#000;padding:8px 13px;border-radius:999px;font-size:12px;font-weight:900}
-    .card-body{padding:20px;text-align:right}
-    .card h3{font-size:24px;margin-bottom:14px}
-    .price{font-size:26px;font-weight:900;color:#facc15;margin-bottom:16px}
-    .btn{width:100%;display:block;text-align:center;border:0;border-radius:18px;padding:14px;background:linear-gradient(90deg,#fde047,#f59e0b);color:#000;font-weight:900;font-size:17px;cursor:pointer}
+    .card-body{padding:20px;text-align:right}.card h3{font-size:24px;margin-bottom:14px}.price{font-size:26px;font-weight:900;color:#facc15;margin-bottom:16px}
+    .btn{width:100%;display:block;text-align:center;border-radius:18px;padding:14px;background:linear-gradient(90deg,#fde047,#f59e0b);color:#000;font-weight:900;font-size:17px}.btn:hover{filter:brightness(1.08)}
+    .cart-panel{position:fixed;top:0;left:0;width:min(420px,100%);height:100%;z-index:50;background:#101010;border-right:1px solid rgba(255,255,255,.12);box-shadow:0 0 80px rgba(0,0,0,.8);transform:translateX(-105%);transition:.3s;padding:22px}.cart-panel.open{transform:translateX(0)}
+    .cart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}.close{background:rgba(255,255,255,.08);color:white;border-radius:12px;padding:10px 14px;font-size:22px}.cart-items{display:grid;gap:12px;padding-bottom:180px}.cart-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;text-align:right}.cart-row{display:flex;justify-content:space-between;gap:10px;align-items:center}.qty{display:flex;align-items:center;gap:8px}.qty button{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.12);color:white;font-weight:900}.cart-bottom{position:absolute;bottom:0;left:0;right:0;padding:18px;background:rgba(0,0,0,.75);border-top:1px solid rgba(255,255,255,.1)}.total{display:flex;justify-content:space-between;font-size:22px;font-weight:900;margin-bottom:12px}.wa{background:#22c55e;color:#fff}.clear{margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,.14);color:#ddd}.empty{color:#aaa;text-align:center;padding:30px;background:rgba(255,255,255,.05);border-radius:16px}
     .footer{text-align:center;padding:25px;border-top:1px solid rgba(255,255,255,.1);color:#777;font-weight:800}
-    @media(max-width:720px){.nav-links{display:none}.brand{font-size:18px;letter-spacing:2px}.card{min-width:82vw;max-width:82vw}.image-box{height:250px}.section h2{text-align:center}}.brand{font-size:18px;letter-spacing:2px}.products{grid-template-columns:1fr}.image-box{height:240px}.section h2{text-align:center}}
+    @media(max-width:720px){.brand{font-size:18px;letter-spacing:2px}.card{min-width:82vw;max-width:82vw}.image-box{height:250px}.section h2{text-align:center}}
   </style>
 </head>
 <body>
   <header class="header">
     <div class="nav">
-      <a class="brand" href="#home">
-        <img src="images/img.png" alt="Victory Store Logo" />
-        <span>VICTORY STORE</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#home">الرئيسية</a>
-        <a href="#mobile-legends">Mobile Legends</a>
-      </nav>
+      <button class="cart-btn" onclick="openCart()">🛒 <span class="cart-count" id="cartCount">0</span></button>
+      <a class="brand" href="#home"><img src="images/img.png" alt="Victory Store Logo"><span>VICTORY STORE</span></a>
     </div>
-  </header>  <main>
+  </header>  <aside class="cart-panel" id="cartPanel">
+    <div class="cart-head"><h2>السلة</h2><button class="close" onclick="closeCart()">×</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-bottom">
+      <div class="total"><span>الإجمالي</span><span id="cartTotal">0﷼</span></div>
+      <a class="btn wa" id="whatsappBtn" target="_blank">إتمام الطلب عبر واتساب</a>
+      <button class="btn clear" onclick="clearCart()">تفريغ السلة</button>
+    </div>
+  </aside>  <main>
     <section id="home" class="hero">
-      <div class="logo-big">
-        <img src="images/img.png" alt="Victory Store Logo" />
-      </div>
+      <div class="logo-big"><img src="images/img.png" alt="Victory Store Logo"></div>
       <h1>أهلا وسهلا بكم في متجر <span class="gold">فيكتوري ستور</span></h1>
       <p>لخدمات موبايل ليجند لرفع التعزيز وشحن الجواهر.</p>
     </section><section id="mobile-legends" class="section">
   <h2>Mobile Legends</h2>
-
   <div class="products">
     <div class="card">
-      <div class="image-box">
-        <span class="badge">تعزيز سريع</span>
-        <img src="images/jjj.jpg" alt="Boost ranking" />
-      </div>
-      <div class="card-body">
-        <h3>Boost ranking</h3>
-        <div class="price">250﷼</div>
-        <button class="btn" onclick="buyProduct('Boost ranking')">اطلب عبر واتساب</button>
-      </div>
+      <div class="image-box"><span class="badge">تعزيز سريع</span><img src="images/jjj.jpg" alt="Boost ranking" onclick="showImage(this.src)"></div>
+      <div class="card-body"><h3>Boost ranking</h3><div class="price">250﷼</div><button class="btn" onclick="addToCart('Boost ranking',250)">أضف للسلة</button></div>
     </div>
-
     <div class="card">
-      <div class="image-box">
-        <span class="badge">الأكثر طلبًا</span>
-        <img src="images/ooo.jpg" alt="Mobile legends ranks" />
-      </div>
-      <div class="card-body">
-        <h3>Mobile legends ranks</h3>
-        <div class="price">350﷼</div>
-        <button class="btn" onclick="buyProduct('Mobile legends ranks')">اطلب عبر واتساب</button>
-      </div>
+      <div class="image-box"><span class="badge">الأكثر طلبًا</span><img src="images/ooo.jpg" alt="Mobile legends ranks" onclick="showImage(this.src)"></div>
+      <div class="card-body"><h3>Mobile legends ranks</h3><div class="price">350﷼</div><button class="btn" onclick="addToCart('Mobile legends ranks',350)">أضف للسلة</button></div>
     </div>
   </div>
 </section>
 
-  </main>  <footer class="footer">جميع الحقوق محفوظة © VICTORY STORE</footer>  <script>
-    function buyProduct(productName){
-      const message = 'مرحباً، أريد طلب منتج: ' + productName;
-      window.open('https://wa.me/201554648163?text=' + encodeURIComponent(message), '_blank');
-    }
-  </script>  <div id="imgModal" style="position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:999">
-    <img id="modalImg" style="max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 0 40px rgba(0,0,0,.8)">
-  </div>  <script>
-    function buyProduct(productName){
-      const message = 'مرحباً، أريد طلب منتج: ' + productName;
-      window.open('https://wa.me/201554648163?text=' + encodeURIComponent(message), '_blank');
-    }
+  </main>  <footer class="footer">جميع الحقوق محفوظة © VICTORY STORE</footer>  <div id="imgModal" onclick="hideImage()" style="position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:999"><img id="modalImg" style="max-width:92%;max-height:90%;border-radius:14px"></div>  <script>
+    const WHATSAPP_NUMBER = '201554648163';
+    let cart = [];
 
-    document.querySelectorAll('.image-box img').forEach(img=>{
-      img.addEventListener('click',()=>{
-        document.getElementById('imgModal').style.display='flex';
-        document.getElementById('modalImg').src=img.src;
-      });
-    });
-
-    document.getElementById('imgModal').addEventListener('click',()=>{
-      document.getElementById('imgModal').style.display='none';
-    });
+    function openCart(){document.getElementById('cartPanel').classList.add('open')}
+    function closeCart(){document.getElementById('cartPanel').classList.remove('open')}
+    function addToCart(name, price){
+      const item = cart.find(p => p.name === name);
+      if(item){item.qty++}else{cart.push({name,price,qty:1})}
+      renderCart();openCart();
+    }
+    function changeQty(name, amount){cart=cart.map(i=>i.name===name?{...i,qty:i.qty+amount}:i).filter(i=>i.qty>0);renderCart()}
+    function clearCart(){cart=[];renderCart()}
+    function renderCart(){
+      const count=cart.reduce((s,i)=>s+i.qty,0);
+      const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+      document.getElementById('cartCount').textContent=count;
+      document.getElementById('cartTotal').textContent=total+'﷼';
+      document.getElementById('cartItems').innerHTML=cart.length?cart.map(i=>`
+        <div class="cart-item"><div class="cart-row"><div><h3>${i.name}</h3><p style="color:#facc15;margin-top:6px">${i.price}﷼</p></div><div class="qty"><button onclick="changeQty('${i.name}',-1)">-</button><b>${i.qty}</b><button onclick="changeQty('${i.name}',1)">+</button></div></div></div>
+      `).join(''):'<div class="empty">السلة فارغة</div>';
+      const items=cart.map(i=>`- ${i.name} × ${i.qty} = ${i.price*i.qty}﷼`).join('\n');
+      const msg=cart.length?`مرحباً، أريد إتمام الطلب:\n${items}\n\nالإجمالي: ${total}﷼`:'مرحباً، أريد طلب منتج من Victory Store';
+      document.getElementById('whatsappBtn').href='https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg);
+    }
+    function showImage(src){document.getElementById('modalImg').src=src;document.getElementById('imgModal').style.display='flex'}
+    function hideImage(){document.getElementById('imgModal').style.display='none'}
+    renderCart();
   </script></body>
 </html>
