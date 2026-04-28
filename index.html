@@ -19,7 +19,7 @@
     <div class="container nav">
       <button class="menu-btn" onclick="openMenu()">☰</button>
       <a class="logo" href="#home" style="display:flex;align-items:center;gap:12px">
-        <img src="images/img.png" alt="logo" style="width:42px;height:42px;object-fit:contain;border-radius:50%;box-shadow:0 0 22px rgba(250,204,21,.45)">
+        <img src="/victory-store/images/img.png" alt="logo" style="width:42px;height:42px;object-fit:contain;border-radius:50%;box-shadow:0 0 22px rgba(250,204,21,.45)">
         <span>VICTORY STORE</span>
       </a>
       <nav class="links">
@@ -48,7 +48,7 @@
     </div>
   </aside>  <section id="home" class="hero container">
     <div class="circle-logo">
-  <img src="images/img.png" alt="logo" class="main-logo">
+  <img src="/victory-store/images/img.png" alt="logo" class="main-logo">
 </div>
     <h1>أهلا وسهلا بكم في متجر <span class="gold">فيكتوري ستور</span></h1>
     <p>لخدمات موبايل ليجند لرفع التعزيز وشحن الجواهر.</p>
@@ -72,7 +72,7 @@
     ];
     let cart = [];
 
-    function imagePath(name){ return `images/${name}.png`; }
+    function imagePath(name){ return `/victory-store/images/${name}.png`; }
 
     function renderProducts(){
       document.getElementById('products').innerHTML = products.map(p => `
