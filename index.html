@@ -74,34 +74,12 @@
 
     function imagePath(name){ return `./images/${name}.png`; }
 
-    function tryNextImage(img, name){
-      const tries = [
-        `./images/${name}.png`,
-        `./images/${name}.jpg`,
-        `./images/${name}.jpeg`,
-        `./images/${name}.webp`,
-        `/victory-store/images/${name}.png`,
-        `/victory-store/images/${name}.jpg`,
-        `/victory-store/images/${name}.jpeg`,
-        `/victory-store/images/${name}.webp`
-      ];
-      const current = img.getAttribute('data-try') ? Number(img.getAttribute('data-try')) : 0;
-      const next = current + 1;
-      if(next < tries.length){
-        img.setAttribute('data-try', next);
-        img.src = tries[next];
-      } else {
-        img.onerror = null;
-        img.src = `https://placehold.co/700x500/111111/facc15?text=${name}`;
-      }
-    }.png`; }
-
     function renderProducts(){
       document.getElementById('products').innerHTML = products.map(p => `
         <article class="card">
           <div class="img-wrap">
             <span class="badge">${p.badge}</span>
-            <img src="${imagePath(p.image)}" alt="${p.name}" onerror="tryNextImage(this,'${p.image}')">
+            <img src="${imagePath(p.image)}" alt="${p.name}" onerror="this.src='https://placehold.co/700x500/111111/facc15?text=${p.image}'">
           </div>
           <div class="card-body">
             <h3>${p.name}</h3>
@@ -112,12 +90,7 @@
       `).join('');
     }
 
-    function addToCart(id){
-      const product = products.find(p => p.id === id);
-      const found = cart.find(i => i.id === id);
-      if(found) found.qty++;
-      else cart.push({...product, qty:1});
-      renderCart();
+    function renderCart(){
       openCart();
     }
 
